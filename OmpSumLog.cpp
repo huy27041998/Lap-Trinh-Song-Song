@@ -17,22 +17,22 @@ void print(int* a, int num) {
 }
 int sumArray(int *a, int num) {
     int numberThread  = num / 2;
-    int *b = new int[num / 2];
-    while(numberThread != 1) {
+    int i = 1;
+    while(numberThread >= 1) {
         omp_set_num_threads(numberThread);
         #pragma omp parallel
         {
             int id = omp_get_thread_num();
-            b[id] = a[2 * id] + a[2 * id + 1];
+            int left = 2 * id * i;
+            int right = (2 * id + 1) * i;
+            if (right < num)
+                a[left] = a[left] + a[right];
         }
-        for (int i = 0; i < numberThread; i++) {
-            a[i] = b[i];
-        }
-        if (numberThread %2 == 1) b[numberThread - 1] = a[numberThread - 1];
-        //print(b, numberThread);
-        numberThread = (numberThread % 2 == 0 || numberThread == 1 ? numberThread /= 2 : numberThread / 2 + 1);
+        i *= 2;
+        if (numberThread == 1) break;
+        numberThread = numberThread % 2 ==0 ? numberThread / 2 : numberThread / 2 + 1;
     }
-    return b[0];
+    return a[0];
 
 }
 int main() {
