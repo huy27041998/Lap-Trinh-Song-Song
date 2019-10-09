@@ -20,7 +20,7 @@ int* sumArray(int *a, int*b, int num, int numthread){
 		for (int i = start; i < end; i++){
 			if (i < num) {
 				// printf("%d\n", i);
-				c[i] = a[i] + a[i];
+				c[i] = a[i] + b[i];
 			}
 		}
 	//Moi thread cong tren 1 doan cua array

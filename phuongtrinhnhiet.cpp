@@ -32,8 +32,7 @@ int main()
     {
         DHB2(T, dT);
         for (i = 0; i < M; i++)
-            *(T + i) = *(T + i) + *(dT + i) * dt * 1.5;
-        // t = t + dt;
+            *(T + i) = *(T + i) + *(dT + i) * dt * 0.1;
         print(T, (int) M);
     }
     print(T, (int) M);
